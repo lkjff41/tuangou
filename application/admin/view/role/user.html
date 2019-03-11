@@ -1,0 +1,33 @@
+<!--包含头部文件-->
+{include file="public/header" /}
+<body>
+<div class="page-container">
+	<form class="form form-horizontal form-o2o-add" id="form-o2o-add" method="post" action="{:url('role/user')}">
+		<input type="hidden" name="id" value="{$id}" id="">
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>角色名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				{volist name='user' id='v'}
+				{if condition='$v.id neq 1'}
+				<input type="checkbox" <?php if(in_array($v['id'],$users)):?>echo checked="checked"<?php endif;?> value="{$v.id}"  name="user_id[]">{$v.username}&nbsp;&nbsp;&nbsp;&nbsp;
+				{/if}
+				{/volist}
+			</div>
+		</div>
+
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<button type="submit" class="btn btn-primary radius">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
+				<button type="button" class="btn btn-default radius ml-20" onClick="layer_close();">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+</div>
+
+<!--包含头部文件-->
+{include file="public/footer" /}

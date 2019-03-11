@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{$title}</title>
+    <link rel="shortcut icon" href="">
+
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+
+    {load href="__ADMIN__/js/common.js" /}
+
+    <link rel="stylesheet" href="__PUBLIC__/css/base.css" />
+    <link rel="stylesheet" href="__PUBLIC__/css/common.css" />
+    <link rel="stylesheet" href="__PUBLIC__/css/{$controller}.css" />
+    <!--<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/bootstrap.css" />-->
+
+    <script type="text/javascript" src="__PUBLIC__/js/html5shiv.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/respond.min.js"></script>
+    <script type="text/javascript" src="__ADMIN__/js/bootstrap.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="__ADMIN__/css/bootstrap.css" />-->
+</head>
+<body>
+<div class="header-bar">
+    <div class="header-inner">
+        <ul class="father">
+            <li><a class="cityname" cityid="{$city['id']}">{$city['name']}</a></li>
+            <li>|</li>
+            <li class="city">
+                <a>切换城市<span class="arrow-down-logo"></span></a>
+                <div class="city-drop-down">
+                    <h3>热门城市</h3>
+                    <ul class="son">
+                        {volist name='citys' id='v'}
+                        <li><a href="{:url('index/index',['city'=>$v['uname']])}">{$v.name}</a></li>
+                        {/volist}
+                    </ul>
+
+                </div>
+            </li>
+            {if condition='$user'}
+            <li  class="city">
+                <a href="">你好，{$user.username}<span class="arrow-down-logo"></span></a>
+                <div class="city-drop-down" style="width: 60px">
+                    <!--<h3>热门城市</h3>-->
+                    <ul class="son">
+                        <li><a target="_blank" href="{:url('user/edit',['id'=>$user['id']])}">修改密码</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="{:url('myorder/index')}">我的订单</a></li>
+            <li><a href="{:url('user/logout')}">退出</a></li>
+            {else}
+            <li><a href="{:url('user/register')}">注册</a></li>
+            <li>|</li>
+            <li><a href="{:url('user/login')}">登录</a></li>
+            {/if}
+            <li><a target="_blank" href="{:url('bis/login/index')}">商户中心</a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="search">
+    <a href="{:url('index/index')}"><img src="__PUBLIC__/image/logo.png" /></a>
+
+</div>
+
+<div class="nav-bar-header">
+    <div class="nav-inner">
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="{:url('lists/index',['cate'=>0])}"><span class="item">全部分类</span></a>
+                <div class="left-menu">
+                    <?php foreach ($list as $k=>$v):?>
+                    <div class="level-item">
+                        <div class="first-level">
+                            <dl>
+                                <dt class="title"><a href="{:url('lists/index',['cate'=>$k])}" target="_top">{$v[0]}</a></dt>
+                                {volist name='v[1]' id='v1' length='2'}
+                                <dd><a href="{:url('lists/index',['cate'=>$k,'secate'=>$v1.id])}" target="_blank" class="">{$v1.name}</a></dd>
+                                {/volist}
+                            </dl>
+                        </div>
+                        <div class="second-level">
+                            <div class="section">
+
+                                <div class="section-item clearfix no-top-border">
+                                    <h3>其他分类</h3>
+                                    <ul>
+                                        {volist name='v[1]' id='v1'}
+                                        <!--<li><a class="hot">精选品牌</a></li>-->
+                                        <li><a target="_blank" href="{:url('lists/index',['cate'=>$k,'secate'=>$v1.id])}">{$v1.name}</a></li>
+                                        {/volist}
+
+                                    </ul>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <?php endforeach;?>
+                </div>
+            </li>
+            <li class="nav-item"><a id="shouye" href="{:url('index/index')}" class="item first ">首页</a></li>
+            <!--<li class="nav-item"><a class="item">团购</a></li>-->
+            <li class="nav-item"><a id="shanhu" href="{:url('bislist/index')}" class="item">商户</a></li>
+        </ul>
+    </div>
+</div>

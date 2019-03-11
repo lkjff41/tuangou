@@ -1,0 +1,117 @@
+
+{include file='common/head'}
+{include file='common/nav'}
+
+<!--<link rel="stylesheet" href="__PUBLIC__/css/lists.css" />-->
+<div class="page-body">
+    <div class="filter-bg">
+        <div class="filter-wrap">
+            <div class="w-filter-ab-test">
+                <div class="w-filter-top-nav clearfix" style="margin:12px">
+
+
+                </div>
+
+
+                <ul class="itemlist eight-row-height">
+                    {volist name='bislist' id='v'}
+                    <li class="j-card">
+                        <a href="{:url('detail/index',['id'=>$v.id])}">
+                            <div class="imgbox">
+                                <!--<ul class="marketing-label-container">-->
+                                <!--<li class="marketing-label marketing-free-appoint"></li>-->
+                                <!--</ul>-->
+                                <!--<div class="range-area">-->
+                                <!--<div class="range-bg"></div>-->
+                                <!--<div class="range-inner">-->
+                                <!--<span class="white-locate"></span>-->
+                                <!--安贞 六里桥 丽泽桥 安定门 劲松 昌平镇 航天桥 通州区 通州北苑-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <div class="borderbox">
+                                    <img src="{$v.logo}" />
+                                </div>
+                            </div>
+                        </a>
+                        <div class="contentbox">
+                            <a href="{:url('detail/index',['id'=>$v.id])}" target="_blank">
+                                <div class="header">
+                                    <h4 class="title ">{$v.name}</h4>
+                                </div>
+                                <p>{$v.desc|html_entity_decode}</p>
+                            </a>
+
+
+                        </div>
+                    </li>
+                    {/volist}
+                </ul>
+                {:pagination($bislist)}
+            </div>
+        </div>
+        <div class="content-wrap">共<span style="color: #ff4883"><?php echo count($bislist);?></span>条</div>
+    </div>
+
+    <div class="footer-content">
+        <div class="copyright-info">
+
+        </div>
+    </div>
+    <script>
+        var SCOPE = {
+            'getcate_url' : '{:url("api/Category/getCateByParentId")}',
+            'getshop_url' : '{:url("api/deal/getListShops")}'
+        };
+    </script>
+    <script>
+        $(".tab-item-wrap").click(function(){
+            var index = $(".tab-item-wrap").index(this);
+            $(".tab-item-wrap").removeClass("selected");
+            $(".district-cont-wrap").css({display: "none"});
+            $(this).addClass("selected");
+            $(".district-cont-wrap").eq(index).css({display: "block"});
+        });
+        $(".sort-area a").click(function(){
+            $(".sort-area a").removeClass("sort-default-active").css({color: "#666"});
+            $(this).addClass("sort-default-active").css({color: "#ff4883"});
+        });
+    </script>
+    </body>
+    </html>
+
+    <script>
+        $('.fristcate').click(function () {
+            var last = $('.filter-active-all-ab');
+            var id = $(this).attr('cid');
+            var cityid = $('.cityname').attr('cityid');
+            var catepostData = {
+                'id': id,
+            };
+            var url = SCOPE.getcate_url;
+            $.post(url, catepostData, function (result) {
+                if (result.status == 1) {
+                    data = result.data;
+                    html = '';
+                    $(data).each(function (i) {
+                        html += "<a class='w-filter-item-ab'><span class='twocate item-content' secid='" + this.id + "' >" + this.name + "</span></a>"
+                        $('.secategory').html(html)
+                    })
+                }
+            }, "json")
+            $(this).addClass('filter-active-all-ab');
+            $(last).removeClass('filter-active-all-ab');
+        })
+        $(document).on("click",".twocate",function () {
+            $(this).addClass('filter-active-all-ab');
+            list = $(this).parent().siblings();
+            $(list).each(function (i) {
+                $(this).find('span').removeClass('filter-active-all-ab');
+            })
+        })
+    </script>
+    <script>
+        $('#shouye').click(function(){
+            // $('#shanhu').removeClass('active');
+            $('#shouye').addClass('active');
+        })
+    </script>

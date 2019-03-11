@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>注册</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/base.css" />
+    <link rel="stylesheet" href="__PUBLIC__/css/register.css" />
+    <script type="text/javascript" src="__PUBLIC__/js/html5shiv.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/respond.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="head">
+            <ul>  
+                <li><a href="{:url('index/index')}"><img src="__PUBLIC__/image/logo.png" alt="logo"></a></li>
+                <li class="divider"></li>
+                <li><a href="index.html"></a></li>
+            </ul>
+            <div class="login-link">
+                <span>我已注册，现在就</span>
+                <a href="{:url('user/login')}">登录</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <form method="post" action="">
+                <p class="pass-form-item">
+                    <label class="pass-label">用户名</label>
+                    <input type="text" name="username" id="username" class="pass-text-input" placeholder="请设置用户名">
+                    <span  id='cfname'></span>
+                </p>
+                <p class="pass-form-item">
+                    <label class="pass-label">手机号码</label>
+                    <input type="text" name="mobile" class="pass-text-input" placeholder="请设置手机号码">
+                </p>
+                <p class="pass-form-item">
+                    <label class="pass-label">邮箱号</label>
+                    <input type="text" name="email" class="pass-text-input" placeholder="可用于接受团购券账号和密码便于消费">
+                </p>
+                
+                <p class="pass-form-item">
+                    <label class="pass-label">密码</label>
+                    <input type="password" name="password" id="password" class="pass-text-input" placeholder="请设置登录密码">
+                </p>
+                <p class="pass-form-item">
+                    <label class="pass-label">确认密码</label>
+                    <input type="password" name="sepassword" id="sepassword" class="pass-text-input" placeholder="请设置登录密码">
+                    <span  id='cfpassword'></span>
+                </p>
+                <p class="pass-form-item">
+                    <label class="pass-label">验证码</label>
+                    <input type="text" name="captcha" class="pass-text-input " placeholder="请输入验证码">
+                </p>
+                <p class="pass-form-item">
+                    <label class="pass-label"></label>
+                    <img src="{:captcha_src()}" onclick="this.src='{:captcha_src()}?'+Math.random()" alt="验证码">
+                </p>
+                <p class="pass-form-item">
+                    <input type="submit" value="注册" class="pass-button">
+                </p>
+            </form>
+           
+        </div>
+
+        <div class="foot">
+            <div>
+                <div>2016&nbsp;©Baidu</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{load href="__ADMIN__/js/common.js" /}
+<script>
+    var SCOPE = {
+        'cfname_url': '{:url("api/register/cfusername")}',
+        'repassword_url': '{:url("api/register/repassword")}',
+    };
+</script>

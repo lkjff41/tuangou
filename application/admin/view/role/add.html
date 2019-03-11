@@ -1,0 +1,67 @@
+<!--包含头部文件-->
+{include file="public/header" /}
+<body>
+<div class="page-container">
+	<form class="form form-horizontal form-o2o-add" id="form-o2o-add" method="post" action="">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>角色名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="name" name="name">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>权限名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<div class="check-box">
+					{volist name='tree' id='v'}
+					<?php echo str_repeat('--',$v['level']*2);?>
+					<input level_id="{$v.level}" type="checkbox" value="{$v.id}" name="permission_id[]">{$v.name}<br/>
+					{/volist}
+
+				</div>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<button type="submit" class="btn btn-primary radius">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
+				<button type="button" class="btn btn-default radius ml-20" onClick="layer_close();">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+		
+
+	</form>
+</div>
+</div>
+
+<!--包含头部文件-->
+{include file="public/footer" /}
+<script>
+    $(":checkbox").click(function () {
+        var tmp_level_id = levle_id = $(this).attr('level_id');
+        //判断选中没有
+        if ($(this).prop("checked")) {
+            $(this).nextAll(":checkbox").each(function (k,v){
+                if ($(v).attr("level_id")>levle_id)
+                    $(v).prop('checked','checked');
+                else
+                    return false;
+            });
+            $(this).prevAll(":checkbox").each(function (k,v) {
+                if ($(v).attr("level_id")<tmp_level_id){
+                    $(v).prop("checked","checked");
+                    tmp_level_id--;//在找上一级
+                }
+            })
+        }else {
+            $(this).nextAll(":checkbox").each(function (k,v) {
+                if($(v).attr("level_id")>levle_id)
+                    $(v).removeAttr("checked");
+                else
+                    return false;
+            });
+        }
+    });
+
+</script>
