@@ -11,7 +11,7 @@ class Map{
 
     //获取坐标
     public static function  getLngLat($address){
-//        http://api.map.baidu.com/geocoder/v2/?address=
+//        http://api.map.baidu.com/geocoder/v2/?address
 //        //北京市海淀区上地十街10号&output=json&ak=您的ak&callback=showLocation //GET请求
         if (!$address){
             return '';
